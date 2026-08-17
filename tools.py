@@ -37,5 +37,4 @@ def scrape_url(url: str) -> str:
         return f"Could not scrape URL: {str(e)}"
 
 
-if __name__ == "__main__":
     print(scrape_url.invoke({'url': 'https://www.hindustantimes.com/india-news/cjp-abhijeet-dipke-backs-madhya-pradesh-gen-alpha-protest-recalls-dharmendra-pradhan-resignation-101786623081415.html'}))
