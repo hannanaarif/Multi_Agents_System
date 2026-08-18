@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI — Multi-Agent Research System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Highlight.js for Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Background Ambient Glow -->
+    <div class="glow-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Top Header Navigation -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain-circuit"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Nexus<span>AI</span></h1>
+                    <span class="sub-title">Autonomous Multi-Agent Orchestrator</span>
+                </div>
+            </div>
+
+            <div class="header-badges">
+                <div class="badge status-badge">
+                    <span class="pulse-dot"></span>
+                    <span id="system-status">System Ready</span>
+                </div>
+                <div class="badge model-badge">
+                    <i class="fa-solid fa-microchip"></i> GPT-4o-Mini
+                </div>
+                <div class="badge tool-badge">
+                    <i class="fa-solid fa-magnifying-glass"></i> Tavily + Scraping
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Hero Input Section -->
+        <main class="main-content">
+            <section class="search-section card-glass">
+                <div class="section-title">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Initiate Autonomous Deep Research</h2>
+                    <p>Enter any topic or query. Our 4 specialized AI agents will search, scrape, synthesize, and audit a comprehensive report.</p>
+                </div>
+
+                <div class="input-wrapper">
+                    <div class="input-box">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="topic-input" placeholder="e.g. Artificial Intelligence 2025 updates, Quantum Computing trends..." autocomplete="off">
+                        <button id="run-btn" class="btn-primary">
+                            <span id="btn-text">Run Research Pipeline</span>
+                            <i class="fa-solid fa-arrow-right-long" id="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Topic Quick Chips -->
+                <div class="quick-topics">
+                    <span class="chip-label"><i class="fa-solid fa-fire"></i> Trending Topics:</span>
+                    <div class="chip-group">
+                        <button class="topic-chip" data-topic="Artificial Intelligence 2025 updates">🤖 AI 2025 Updates</button>
+                        <button class="topic-chip" data-topic="Quantum Computing breakthroughs">⚛️ Quantum Computing</button>
+                        <button class="topic-chip" data-topic="NVIDIA financial growth & AI chips">📈 NVIDIA AI Chips</button>
+                        <button class="topic-chip" data-topic="Intraday stock trading strategies">📊 Intraday Trading</button>
+                        <button class="topic-chip" data-topic="SpaceX Starship upcoming launches">🚀 SpaceX Starship</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Agent Telemetry Flow (Visual Pipeline Nodes) -->
+            <section class="pipeline-section">
+                <div class="pipeline-header">
+                    <h3><i class="fa-solid fa-network-wired"></i> Agent Execution Telemetry</h3>
+                    <span id="timer-display" class="timer-badge"><i class="fa-regular fa-clock"></i> 00:00</span>
+                </div>
+
+                <div class="agent-grid">
+                    <!-- Agent Node 1 -->
+                    <div class="agent-card card-glass" id="agent-node-1">
+                        <div class="agent-card-header">
+                            <div class="agent-avatar agent-search">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div class="agent-info">
+                                <h4>1. Search Agent</h4>
+                                <span class="agent-role">Tavily Web Intelligence</span>
+                            </div>
+                            <div class="agent-status-icon" id="status-icon-1">
+                                <i class="fa-solid fa-circle-notch spinner hide"></i>
+                                <i class="fa-solid fa-circle-check check hide"></i>
+                                <i class="fa-regular fa-circle idle"></i>
+                            </div>
+                        </div>
+                        <p class="agent-desc">Queries web search APIs for high-trust sources and live data.</p>
+                        <div class="agent-progress-bar"><div class="fill" id="fill-1"></div></div>
+                    </div>
+
+                    <!-- Connection Line 1-2 -->
+                    <div class="connector-line"><i class="fa-solid fa-angle-right"></i></div>
+
+                    <!-- Agent Node 2 -->
+                    <div class="agent-card card-glass" id="agent-node-2">
+                        <div class="agent-card-header">
+                            <div class="agent-avatar agent-reader">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div class="agent-info">
+                                <h4>2. Reader Agent</h4>
+                                <span class="agent-role">Content Extraction & Scraper</span>
+                            </div>
+                            <div class="agent-status-icon" id="status-icon-2">
+                                <i class="fa-solid fa-circle-notch spinner hide"></i>
+                                <i class="fa-solid fa-circle-check check hide"></i>
+                                <i class="fa-regular fa-circle idle"></i>
+                            </div>
+                        </div>
+                        <p class="agent-desc">Fetches target URLs and parses deep body text using BeautifulSoup.</p>
+                        <div class="agent-progress-bar"><div class="fill" id="fill-2"></div></div>
+                    </div>
+
+                    <!-- Connection Line 2-3 -->
+                    <div class="connector-line"><i class="fa-solid fa-angle-right"></i></div>
+
+                    <!-- Agent Node 3 -->
+                    <div class="agent-card card-glass" id="agent-node-3">
+                        <div class="agent-card-header">
+                            <div class="agent-avatar agent-writer">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div class="agent-info">
+                                <h4>3. Writer Agent</h4>
+                                <span class="agent-role">Synthesizer & Document Writer</span>
+                            </div>
+                            <div class="agent-status-icon" id="status-icon-3">
+                                <i class="fa-solid fa-circle-notch spinner hide"></i>
+                                <i class="fa-solid fa-circle-check check hide"></i>
+                                <i class="fa-regular fa-circle idle"></i>
+                            </div>
+                        </div>
+                        <p class="agent-desc">Compiles findings into a structured, executive research report.</p>
+                        <div class="agent-progress-bar"><div class="fill" id="fill-3"></div></div>
+                    </div>
+
+                    <!-- Connection Line 3-4 -->
+                    <div class="connector-line"><i class="fa-solid fa-angle-right"></i></div>
+
+                    <!-- Agent Node 4 -->
+                    <div class="agent-card card-glass" id="agent-node-4">
+                        <div class="agent-card-header">
+                            <div class="agent-avatar agent-critic">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                            </div>
+                            <div class="agent-info">
+                                <h4>4. Critic Agent</h4>
+                                <span class="agent-role">Peer Review & Quality Audit</span>
+                            </div>
+                            <div class="agent-status-icon" id="status-icon-4">
+                                <i class="fa-solid fa-circle-notch spinner hide"></i>
+                                <i class="fa-solid fa-circle-check check hide"></i>
+                                <i class="fa-regular fa-circle idle"></i>
+                            </div>
+                        </div>
+                        <p class="agent-desc">Evaluates factual accuracy, structure, and calculates quality score.</p>
+                        <div class="agent-progress-bar"><div class="fill" id="fill-4"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section (Tabs for Master Report & Critic Audit) -->
+            <section class="results-section hide" id="results-section">
+                <!-- Dashboard Toolbar -->
+                <div class="results-toolbar">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="tab-report">
+                            <i class="fa-solid fa-file-contract"></i> Master Report
+                        </button>
+                        <button class="tab-btn" data-tab="tab-critic">
+                            <i class="fa-solid fa-award"></i> Critic Scorecard
+                        </button>
+                        <button class="tab-btn" data-tab="tab-raw">
+                            <i class="fa-solid fa-code"></i> Raw Telemetry
+                        </button>
+                    </div>
+
+                    <div class="actions">
+                        <button id="copy-report-btn" class="btn-secondary">
+                            <i class="fa-regular fa-copy"></i> Copy Markdown
+                        </button>
+                        <button id="print-report-btn" class="btn-secondary">
+                            <i class="fa-solid fa-print"></i> Export / Print
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content 1: Master Report -->
+                <div class="tab-content active card-glass" id="tab-report">
+                    <div class="report-view markdown-body" id="report-output">
+                        <!-- Rendered Markdown goes here -->
+                    </div>
+                </div>
+
+                <!-- Tab Content 2: Critic Scorecard -->
+                <div class="tab-content card-glass" id="tab-critic">
+                    <div class="critic-deck">
+                        <div class="score-summary-card">
+                            <div class="score-gauge-ring">
+                                <svg viewBox="0 0 100 100" class="gauge-svg">
+                                    <circle cx="50" cy="50" r="42" class="gauge-bg"></circle>
+                                    <circle cx="50" cy="50" r="42" class="gauge-fill" id="gauge-fill-circle"></circle>
+                                </svg>
+                                <div class="gauge-text">
+                                    <span id="critic-score-num">--</span>
+                                    <span class="denom">/10</span>
+                                </div>
+                            </div>
+                            <div class="verdict-wrapper">
+                                <h5>Quality Audit Score</h5>
+                                <p id="critic-verdict" class="verdict-text">Waiting for agent evaluation...</p>
+                            </div>
+                        </div>
+
+                        <div class="critic-details-grid">
+                            <div class="critic-box box-strengths">
+                                <h4><i class="fa-solid fa-thumbs-up"></i> Strengths</h4>
+                                <div id="critic-strengths-list" class="critic-list"></div>
+                            </div>
+                            <div class="critic-box box-improvements">
+                                <h4><i class="fa-solid fa-wrench"></i> Areas to Improve</h4>
+                                <div id="critic-improvements-list" class="critic-list"></div>
+                            </div>
+                        </div>
+
+                        <div class="critic-raw-card">
+                            <h4><i class="fa-solid fa-terminal"></i> Raw Critic Feedback</h4>
+                            <pre id="critic-raw-text"></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 3: Raw Telemetry -->
+                <div class="tab-content card-glass" id="tab-raw">
+                    <div class="raw-telemetry-view">
+                        <div class="raw-block">
+                            <h4><i class="fa-solid fa-globe"></i> Step 1: Search Agent Output</h4>
+                            <pre id="raw-search-output"></pre>
+                        </div>
+                        <div class="raw-block">
+                            <h4><i class="fa-solid fa-book-open"></i> Step 2: Reader Agent Scraped Content</h4>
+                            <pre id="raw-reader-output"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Collapsible Live Cyber Terminal Logs -->
+            <section class="terminal-section card-glass">
+                <div class="terminal-header" id="terminal-toggle">
+                    <div class="terminal-title">
+                        <i class="fa-solid fa-terminal"></i>
+                        <span>Live Execution Terminal Logs</span>
+                    </div>
+                    <div class="terminal-controls">
+                        <span class="log-count-badge" id="log-count">0 logs</span>
+                        <i class="fa-solid fa-chevron-down" id="terminal-chevron"></i>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="log-line log-info">[SYSTEM] Pipeline initialized. Ready to execute multi-agent workflows.</div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Powered by <strong>LangChain Agents</strong> • <strong>FastAPI</strong> • <strong>OpenAI GPT-4o-Mini</strong></p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
