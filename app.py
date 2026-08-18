@@ -198,7 +198,7 @@ async def run_research_stream_endpoint(topic: str):
 # Serve static files
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 async def serve_home():
     index_path = os.path.join(STATIC_DIR, "index.html")
     if os.path.exists(index_path):
